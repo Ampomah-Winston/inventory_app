@@ -1,0 +1,38 @@
+.center-column{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;    
+}
+
+.center-column-top{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;    
+}
+
+.center-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;    
+}
+
+.center-row-start{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;    
+}
+
+
+
+
+
+
+
+.topic{
+    width: 100%;
+    height: 10%;
+}

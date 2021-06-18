@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/position.css">
+    
+</head>
+<body>    
+    <div class="container" id="container">
+        <div class="nav center-row-start" style="color: white;">
+            <img src="images/eagle-face.jpg" alt="">
+            <h3>Eagle inventory app</h3>
+        </div>
+        <div class="wrapper center-column" >
+            <div class="greet center-column-top">
+                <h2 style="color: #0db2e4;">Welcome</h2>
+                <p style="color: white; font-size: 21px;" >
+                    Keeping inventory is not an easy task. 
+                </p>
+                <p style="color: white; font-size: 21px; margin: 0%; padding: 5px; text-align: center;">
+                Use our simple inventory app, t'll save you a lot of time
+                The app will help you create, update, 
+                and delete inventory both directory and tupel level 
+                </p>
+                <p style="color: white; font-size: 21px; margin: 0%;">
+                Click start to sign to continue
+                </p>
+            </div>
+            <div class="next center-column">
+                <h2>Click to start</h2>
+            </div>
+        </div>
+    </div>    
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+    console.log(screen.height)
+    $('.next').on('click',()=>{
+        $('.wrapper').fadeOut(1000,()=>{
+            location.assign('html/sign.html')
+        });
+
+        $('.wrapper div').addClass('move-out')        
+    })
+</script>
+</html>

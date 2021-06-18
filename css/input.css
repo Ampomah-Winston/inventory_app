@@ -1,0 +1,46 @@
+input[type=text] {
+    width: 70%;
+    padding: 15px 22px;
+    margin: 10px 5px;
+    /* background-color: #297EA6; */
+    border-bottom: 1px solid #297EA6;
+    font-size: 15px;
+    color: #297EA6;
+    font-weight: bolder;
+    border: none;
+}
+
+input[type=password] {
+    width: 70%;
+    padding: 15px 22px;
+    margin: 10px 5px;
+    /* background-color: #297EA6; */
+    border-bottom: 1px solid #297EA6;
+    font-size: 15px;
+    color: #297EA6;
+    font-weight: bolder;
+    border: none;
+}
+
+i{
+    font-size: 20px;
+    margin-right: 5px;
+    width: 15%;
+}
+
+input[type=file]{
+    width: 75%;
+    padding: 15px 22px;
+    margin: 10px 5px;
+    box-sizing: border-box;
+    background-color: rgb(248, 38, 108);  
+}
+
+select {
+    width: 80%;
+    padding: 18px 22px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #8842d5;  
+}
