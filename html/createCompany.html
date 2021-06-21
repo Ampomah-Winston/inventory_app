@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Manager</title>
+    <link rel="stylesheet" href="../css/position.css">
+    <link rel="stylesheet" href="../css/input.css">
+    <link rel="stylesheet" href="../css/createCompany.css">
+    <!-- <script src="https://kit.fontawesome.com/4efdf8f922.js" crossorigin="anonymous"></script> -->
+    <script src="../js static/4efdf8f922.js" ></script>
+</head>
+<body>
+    <!-- <div class="nav center-row-start" style="color: white;">
+        <img src="../images/eagle-face.jpg" alt="">
+        <h3>Eagle inventory app</h3>
+        <div style="width: 70%;">
+        </div>
+        <img src="../images/tree.jpg" alt="">
+        <h3></h3>
+    </div> -->
+    
+    <div class="container center-row-start" id="container">
+        <div class="sideBar center-column-top">
+            <div class="greet-top-colored center-row" style="margin-bottom: 10px;">
+                Create company
+            </div>
+            <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
+                <div style="width: 20%; height:100%;background-color: darkorange;"" class="center-column">
+                    <i class="fas fa-key"></i>
+                </div>
+                <input id = "txt_comp_name" type="text"
+                 value="Custard Dimensions" placeholder="Enter company name">
+            </div>
+            <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
+                <div style="width: 20%; height:100%;background-color: darkorange;"" class="center-column">
+                    <i class="fas fa-key"></i>
+                </div>
+                <input id = "txt_access_num" type="text" 
+                value="#0078-009-21" placeholder="Enter #AccessNumber">
+            </div>
+            <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
+                <div style="width: 20%; height:100%;background-color: darkorange;"" class="center-column">
+                    <i class="fas fa-key"></i>
+                </div>
+                <input id = "txt_location" type="text" 
+                value="Farm Ware house" placeholder="Location">
+            </div>
+            <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
+                <div style="width: 20%; height:100%; background-color: darkorange;"" class="center-column" >
+                    <i class="fas fa-key"></i>
+                </div>
+                <input id = "txt_desc" type="text" 
+                value="Farm Machineries" placeholder="Describe company">
+            </div>
+            <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
+               
+            </div>
+            <div class="greet-top-colored-line center-row" style="margin-top: 10px;">
+                <div id="clear" class="center-column button" style="width: 20%; height: 50px; background-color: darkorange;">
+                    <i class="far fa-window-close"></i>
+                </div>
+                <div style="width: 80%;">
+                   
+                </div>
+                <div id="putData" class="center-column button" style="width: 20%; height: 50px;background-color: darkorange;">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>  
+        </div>
+
+        <div id="rightBar" class="rightBar">
+            <div class="greet-top-colored-alt center-row" style="margin-bottom: 10px;">
+               Your companies
+            </div>
+            <table border="1">
+                <thead class="greet-top-colored-alt">
+                    <th>Name</th>
+                    <th>Access Number</th>
+                    <th>Specific</th>
+                    <th>Location</th>
+                    <th style="color: white; background-color: tomato;width: 70px;"> X</th>
+                    <th style="color: white; background-color: lightgreen;width: 70px;"> ||| </th>
+                </thead>
+                <tbody>
+                    <tr style="height: 15px; background-color: transparent;">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td> 
+                        <td></td>
+                    </tr>                         
+                </tbody>
+            </table>
+        </div>
+    </div>    
+</body>
+<script src="../js static/jquery-3.4.1.min.js"></script>
+<script src="../js/companyActions.js"></script>
+</html>

@@ -28,10 +28,10 @@ document.getElementById('sign').addEventListener('click',()=>{
 
    let usersData = [];    
    usersData = localStorage.getItem('users') === null ? [] : JSON.parse(localStorage.getItem('users'));
-   usersData = localStorage.getItem('users') === null ? [] : JSON.parse(localStorage.getItem('users'));
+  //  usersData = localStorage.getItem('users') === null ? [] : JSON.parse(localStorage.getItem('users'));
   
    usersData.push(users);
    localStorage.setItem('users',JSON.stringify(usersData))
-  //  console.log(usersData)
+   location.assign('../html/signIn.html')
    
 });
