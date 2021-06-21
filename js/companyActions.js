@@ -35,7 +35,7 @@ let allActions = () =>{
             <td>${txt_location.value}</td>
             <td>${txt_desc.value}</td>
             <td class="row-delete-btn" style="color: white;" onClick=removeRow(this)> 
-                <i class="far fa-window-close"></i> 
+              <i class="far fa-trash-alt"></i> 
             </td>
             <td class="row-view-btn" style="color: white;" onClick=viewRow(this)> 
                 <i class="far fa-eye"></i> 
@@ -47,12 +47,16 @@ let allActions = () =>{
 }
 
 let removeRow = (row) =>{
-    row.parentElement.classList.add('tr-step-out')
-    row.parentElement.classList.remove('tr-step-in')
-    remeRow(row.parentElement,tableBody);
-    row.setAttribute('style','pointer-events:none;')
-    console.log(row.parentElement);   
-    console.dir(row)
+    let con = confirm("This process is irreversible, click yes to continue or cancel to abort")
+    if(con == true){
+        row.parentElement.classList.add('tr-step-out')
+        row.parentElement.classList.remove('tr-step-in')
+        remeRow(row.parentElement,tableBody);
+        row.setAttribute('style','pointer-events:none;')
+        console.log(row.parentElement);   
+        console.dir(row)
+    }
+   
 }
 
 function remeRow(row,body){
@@ -76,6 +80,7 @@ checkUser = (comp_name,access_num,location,desc)=>{
             'company':comp_name,
             'access_num':access_num,
             'location':location,
+            'specifics':'',
             'desc':desc,
             'owner':logdUserDetails.uname
         }               

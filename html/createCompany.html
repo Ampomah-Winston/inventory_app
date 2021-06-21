@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/position.css">
     <link rel="stylesheet" href="../css/input.css">
     <link rel="stylesheet" href="../css/createCompany.css">
+    <link rel="stylesheet" href="../css/scrollBar.css">
     <!-- <script src="https://kit.fontawesome.com/4efdf8f922.js" crossorigin="anonymous"></script> -->
     <script src="../js static/4efdf8f922.js" ></script>
 </head>
@@ -27,33 +28,40 @@
             </div>
             <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
                 <div style="width: 20%; height:100%;background-color: darkorange;"" class="center-column">
-                    <i class="fas fa-key"></i>
+                    <i class="fas fa-monument"></i>
                 </div>
                 <input id = "txt_comp_name" type="text"
                  value="Custard Dimensions" placeholder="Enter company name">
             </div>
             <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
                 <div style="width: 20%; height:100%;background-color: darkorange;"" class="center-column">
-                    <i class="fas fa-key"></i>
+                    <i class="fas fa-hashtag"></i>
                 </div>
                 <input id = "txt_access_num" type="text" 
                 value="#0078-009-21" placeholder="Enter #AccessNumber">
             </div>
             <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
                 <div style="width: 20%; height:100%;background-color: darkorange;"" class="center-column">
-                    <i class="fas fa-key"></i>
+                    <i class="far fa-compass"></i>
                 </div>
                 <input id = "txt_location" type="text" 
                 value="Farm Ware house" placeholder="Location">
             </div>
             <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
-                <div style="width: 20%; height:100%; background-color: darkorange;"" class="center-column" >
-                    <i class="fas fa-key"></i>
+                <div style="width: 20%; height:100%;background-color: darkorange;"" class="center-column">
+                    <i class="fas fa-sitemap"></i>
+                </div>
+                <input id = "txt_specifics" type="text" 
+                value="Farm Ware house" placeholder="Show Specifics">
+            </div>
+            <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
+                <div style="width: 20%; height:100%; background-color: darkorange;" class="center-column" >
+                    <i class="fas fa-bullhorn"></i>
                 </div>
                 <input id = "txt_desc" type="text" 
                 value="Farm Machineries" placeholder="Describe company">
             </div>
-            <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;">
+            <div class="greet-top-colored-line center-row" style="margin-bottom: 10px;height: 200px;">
                
             </div>
             <div class="greet-top-colored-line center-row" style="margin-top: 10px;">
@@ -75,14 +83,14 @@
             </div>
             <table border="1">
                 <thead class="greet-top-colored-alt">
-                    <th>Name</th>
-                    <th>Access Number</th>
-                    <th>Specific</th>
-                    <th>Location</th>
-                    <th style="color: white; background-color: tomato;width: 70px;"> X</th>
+                    <th> <i class="fas fa-monument"></i> Name</th>
+                    <th> <i class="fas fa-hashtag"></i>Access Number</th>
+                    <th>  <i class="fas fa-sitemap"></i>Specific</th>
+                    <th> <i class="far fa-compass"></i> Location</th>
+                    <th style="color: white; background-color: tomato;width: 70px;"> <i class="far fa-trash-alt"></i> </th>
                     <th style="color: white; background-color: lightgreen;width: 70px;"> ||| </th>
                 </thead>
-                <tbody>
+                <tbody style="height: 200px;">
                     <tr style="height: 15px; background-color: transparent;">
                         <td></td>
                         <td></td>
@@ -91,7 +99,7 @@
                         <td></td> 
                         <td></td>
                     </tr>                         
-                </tbody>
+                </tbody>             
             </table>
         </div>
     </div>    
