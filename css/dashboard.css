@@ -1,0 +1,164 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-image: url('../images/low-poly-grid-haikei.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: hidden;
+}
+
+h1,h2,h3,h4{
+    padding: 0px;
+    margin: 0px;
+}
+
+img{
+    border-radius: 20px;
+    height: 100px;
+    width: 100px;
+}
+
+.container{
+    /* background-color: rgb(143, 160, 95); */
+    height: 700px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.left-side{   
+    background-color: transparent;
+    height: 100%;
+    width: 20%;
+    margin: 5px;
+    border-right: 2px solid chartreuse;
+}
+
+.right-side{    
+    background-color: gray;
+    height: 100%;
+    width: 80%;
+}
+
+.left-side-head{
+    width:100%;   
+    padding: 5%;
+}
+
+#left-side-divider{
+    margin-top: 10px;
+    /* margin-bottom: 10px; */
+    height: 3px;
+    width: 90%;
+    background-color: deepskyblue;
+    border-radius: 20px;
+}
+
+.left-greet {   
+    /* background-color: chartreuse; */
+    border: 1px solid chartreuse;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.left-greet > p:nth-child(1) {
+    font-size: 10px;
+    margin: 2px;
+    background-color: deepskyblue;
+    padding-left: 5px;
+    border-radius: 10px;
+    font-weight: bolder;
+    color: 00101c;
+    font-size: 7px;
+}
+
+.left-greet > p:nth-child(2) {
+    font-size: 12px;
+    margin: 2px;
+    background-color: chartreuse;
+    padding: 1px;
+    border-radius: 10px;
+    color: black;
+}
+
+.left-side-body{
+    margin-top: 20px;
+    width: 90%;
+    height: 50%;
+    /* background-color: dimgrey; */
+    transition: 1s;
+}
+
+.left-side-body > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 140px;
+    height: 30px;
+}
+
+#btn_dash{
+    display: block;
+    /* background-color: deepskyblue; */
+    border:2px solid deepskyblue;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 5px;
+
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+#btn_dash > h4 {
+    width: 90%;
+    color: chartreuse;    
+}
+
+#btn_dash > i {
+    width: 10%;
+    font-size: 15px;
+    color: deepskyblue;    
+}
+
+#dash_container{
+    width: 100%;
+    /* height: 80%; */
+    /* background-color: cyan; */
+    margin-top: 5px;
+    border:2px solid deepskyblue;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: 0.2s;
+    padding-top: 1%;
+}
+
+.toolBox{
+    height: 5vh;
+    width: 90%;
+    background-color: #15384f;
+    margin: 1px 4px;
+    color: chartreuse;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.toolBox1-body{
+    width: 87%;
+    height: 50px;
+    border-left: 1px solid deepskyblue;
+    border-right: 1px solid deepskyblue;
+    border-bottom: 1px solid deepskyblue;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 5px;
+}
+
+
+.toolBox > i {
+    margin-left: 5px;
+}
+
+#btn_dash:active{
+    background-color: cornflowerblue;
+}
