@@ -7,7 +7,7 @@ body{
     overflow-y: hidden;
 }
 
-h1,h2,h3,h4{
+h1,h2,h3,h4,ul,li{
     padding: 0px;
     margin: 0px;
 }
@@ -20,7 +20,7 @@ img{
 
 .container{
     /* background-color: rgb(143, 160, 95); */
-    height: 700px;
+    height: 550px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
@@ -30,7 +30,7 @@ img{
     height: 100%;
     width: 20%;
     margin: 5px;
-    border-right: 2px solid chartreuse;
+    border-right: 2px solid deepskyblue;
 }
 
 .right-side{    
@@ -137,28 +137,69 @@ img{
     height: 5vh;
     width: 90%;
     background-color: #15384f;
-    margin: 1px 4px;
+    margin: 1px 3px;
     color: chartreuse;
     cursor: pointer;
     border-radius: 5px;
 }
 
+.toolBox > i {
+    margin-left: 5px;
+}
+
 .toolBox1-body{
     width: 87%;
-    height: 50px;
+    height: 90px;
     border-left: 1px solid deepskyblue;
     border-right: 1px solid deepskyblue;
     border-bottom: 1px solid deepskyblue;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     margin-bottom: 5px;
+    display: none;
 }
 
-
-.toolBox > i {
-    margin-left: 5px;
+.toolBox1-body > ul{
+    list-style: none;
+    font-size: 10px;
+    width: 90%;
+    margin: auto;
 }
+
+.toolBox1-body > ul > li{
+    padding: 5px;
+    background-color:deepskyblue;
+    margin: 2px auto;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px #15384f;
+    cursor: pointer;
+    transition: 0.8s;
+}
+
+.toolBox1-body > ul > li:active{
+    transition: 0.7s;
+   background: linear-gradient(to left,deepskyblue,chartreuse);
+}
+
 
 #btn_dash:active{
     background-color: cornflowerblue;
+}
+
+.right-side{
+    background-color: transparent;
+}
+
+.right-side-item{
+    height: 50%;
+    width: 100%;
+    /* background-color: chocolate; */
+}
+
+#right-side-divider{   
+    /* margin-bottom: 10px; */
+    height: 2px;
+    width: 100%;
+    background-color: deepskyblue;
+    border-radius: 20px;
 }
