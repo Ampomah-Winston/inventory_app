@@ -1,7 +1,10 @@
 let logdUserDetails = JSON.parse(sessionStorage.getItem('logdUserDetails'))
      == null ? []:JSON.parse(sessionStorage.getItem('logdUserDetails'))[0];
-     
-const body = document.body;
+let body = document.body;
+let nav = body.firstElementChild;
+userDetal = nav.lastElementChild;
+userDetal.innerHTML = logdUserDetails.uname;
+  
 const container = body.getElementsByClassName('container')[0];
 const sideBar = container.children[0];
 const rightBar = container.children[1];
@@ -90,6 +93,14 @@ checkUser = (comp_name,access_num,location,desc)=>{
      }else {
          return
      }    
+}
+
+let viewRow = (row) =>{
+    let con = confirm("You are about to open dashboard with access number ")
+    if(con == true){
+        location.assign('../html/dashboard.html')
+    }
+   
 }
 
 allActions();
