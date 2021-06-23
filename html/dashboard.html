@@ -86,7 +86,7 @@
                             </li>
                             <li class="center-row-start"> 
                                 <i class="fas fa-file-import"></i>
-                                <span style="margin-left: 5px;">Import excel</span>
+                                <span style="margin-left: 5px;">Toggle Summary </span>
                             </li>                            
                         </ul>
                     </div>
@@ -98,11 +98,51 @@
        
        <div class="right-side center-column">
            <div class="right-side-item">
+               
+                <div class="card" id="card">
+                    <div class="card-header center-column">
+                        <h3 style="color: white;">Data Summary</h3>
+                    </div>
+                    <div class="card-body center-row-start">
+                        <div class="card-body-left">
+                            <div class="card-body-head">
 
+                            </div>
+                            <div class="card-body-body center-column">
+                                0
+                            </div>
+                        </div>
+                        <div class="card-body-left">
+                            <div class="card-body-head">
+                                
+                            </div>
+                            <div class="card-body-body center-column">
+                                0
+                            </div>
+                        </div>
+                        <div class="card-body-left">
+                            <div class="card-body-head">
+                                
+                            </div>
+                            <div class="card-body-body center-column">
+                                0
+                            </div>
+                        </div>
+                    </div>
+                </div>
            </div>
            <div id="right-side-divider"></div>
-           <div class="right-side-item">
+           <div class="right-side-item-bottom">
+               
+                <div class="right-side-item-search-box">
+                     <i class="fa fa-search"  style="font-size: 13px;"></i>  </i>
+                    <input type="text" name="" id="" placeholder="Search ...">
+               </div>
 
+
+                <div class="table-wrapper">
+                    
+                </div>
            </div>
        </div>
    </div>
@@ -110,4 +150,51 @@
 <!-- <script src="../js/dashboard.js" ></script> -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="../js/dashboard.js" ></script>
+<script>
+    //Make the DIV element draggagle: 
+    function dragElement(elmnt) {
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      if (document.getElementById(elmnt.id + "header")) {
+        /* if present, the header is where you move the DIV from:*/
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+      } else {
+        /* otherwise, move the DIV from anywhere inside the DIV:*/
+        elmnt.onmousedown = dragMouseDown;
+      }
+    
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+      }
+    
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+    
+      function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+
+    dragElement(document.getElementById("card"));
+    dragElement(document.getElementById("btn_dash"));
+    
+    </script>
 </html>
