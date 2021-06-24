@@ -3,3 +3,15 @@
     height: 25%;
     background-color: crimson;
 }
+
+#tag_ops{
+    width: 40%;
+    height: 70%;
+    background-color: crimson;
+    position: absolute;
+    z-index: 102;
+    top: 10%;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background-image: url('../images/action2.svg');
+}

@@ -5,6 +5,7 @@ $(document).ready(function(){
     toggle($(".t2"),$(".tb2"),$(".ico2"));
     toggle($(".t3"),$(".tb3"),$(".ico3"));
     // deleteObject($('dlt-icon'),$('dlt-icon').parent())
+    backdrop.classList.add('visible')
 });
 
 let btn_startAdd  = document.getElementById('start_add')
