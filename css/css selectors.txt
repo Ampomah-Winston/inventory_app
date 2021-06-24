@@ -168,3 +168,54 @@ For webkit browsers, you can use the following pseudo elements to customize the 
                             </tr>                         
                         </tbody>             
                     </table>
+
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                          <div class="flip-card-front">
+                            <div class="containment">
+                                <h3>Tractors</h3>
+                                <p style="font-size: 5em; margin: 0%;">
+                                    010
+                                </p>
+                                <div class="ico_rims" style="margin-top: 20px;">
+                                     <i class="far fa-eye view-icon" onclick="flipCard(this)"></i>
+                                    <i class="fas fa-exchange-alt update-icon"></i>
+                                </div>                               
+                                <i class="far fa-trash-alt dlt-icon" onclick="deleteObject(this)"></i>                                
+                                <span style="position: absolute; top: 20px; left: 15px;"><i class="fas fa-balance-scale"></i></span>                                
+                            </div>
+                          </div>
+                          <div class="flip-card-back">
+                            <div class="containment">
+                                <h3>Extra</h3>
+                                <div class="">
+                                    <p style=
+                                    "padding: 1px;
+                                     margin: 0%; 
+                                     width: 40%;
+                                    background-color: darkgrey;
+                                    font-size: 10px;">Description</p>
+                                     <div style="
+                                        background-color: #15384f; 
+                                        font-size: 12px; height: 10vh;" class="desc_body">
+                                        Heloo Winston is here
+                                     </div>
+                                </div>  
+                                <div class="">
+                                    <p style=
+                                    "padding: 1px;
+                                     margin: 0%; 
+                                     width: 40%;
+                                    background-color: darkgrey;
+                                    font-size: 10px;">Catetory</p>
+                                     <div style="
+                                        background-color: #15384f; 
+                                        font-size: 12px; height: 5vh;" class="desc_body">
+                                        Heloo Winston is here
+                                     </div>
+                                </div>                               
+                                <i class="far fa-eye view-icon" onclick="flipCard_back(this)" aria-hidden="true"></i>                                
+                            </div>
+                          </div>
+                        </div>
+                    </div>

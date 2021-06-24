@@ -10,6 +10,8 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;    
+    flex-wrap: wrap;
+    flex-grow: inherit;
 }
 
 .center-row{

@@ -6,10 +6,44 @@
     <title>App Manager</title>
     <link rel="stylesheet" href="../css/position.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/scrollBar.css">
+    <link rel="stylesheet" href="../css/test.css">
     <script src="../js static/4efdf8f922.js" ></script>
 </head>
 <body>
    <div class="container center-row">
+    <div id="backdrop"></div>
+    <div class="card" id="card">
+        <div class="card-header center-column">
+            <h3 style="color: white;">Data Summary</h3>
+        </div>
+        <div class="card-body center-row-start">
+            <div class="card-body-left">
+                <div class="card-body-head">
+
+                </div>
+                <div class="card-body-body center-column">
+                    0
+                </div>
+            </div>
+            <div class="card-body-left">
+                <div class="card-body-head">
+                    
+                </div>
+                <div class="card-body-body center-column">
+                    0
+                </div>
+            </div>
+            <div class="card-body-left">
+                <div class="card-body-head">
+                    
+                </div>
+                <div class="card-body-body center-column">
+                    0
+                </div>
+            </div>
+        </div>
+    </div>
        <div class="left-side center-column-top">
             <div id="left-side-head" class="center-row">
                 <i class="fas fa-user" style="font-size: 50px; color: deepskyblue;"></i>
@@ -36,7 +70,7 @@
                     </div>
                     <div class="toolBox1-body tb1">
                         <ul>
-                            <li class="center-row-start"> 
+                            <li id="start_add" class="center-row-start"> 
                                 <i class="fas fa-folder-plus"></i>
                                 <h3 style="margin-left: 5px;">Add item</h3>
                             </li>
@@ -97,51 +131,67 @@
         </div>
        
        <div class="right-side center-column">
-           <div class="right-side-item">
+           <div class="right-side-item center-row-start">  
                
-                <div class="card" id="card">
-                    <div class="card-header center-column">
-                        <h3 style="color: white;">Data Summary</h3>
-                    </div>
-                    <div class="card-body center-row-start">
-                        <div class="card-body-left">
-                            <div class="card-body-head">
-
-                            </div>
-                            <div class="card-body-body center-column">
-                                0
-                            </div>
-                        </div>
-                        <div class="card-body-left">
-                            <div class="card-body-head">
-                                
-                            </div>
-                            <div class="card-body-body center-column">
-                                0
-                            </div>
-                        </div>
-                        <div class="card-body-left">
-                            <div class="card-body-head">
-                                
-                            </div>
-                            <div class="card-body-body center-column">
-                                0
-                            </div>
-                        </div>
-                    </div>
-                </div>
            </div>
            <div id="right-side-divider"></div>
-           <div class="right-side-item-bottom">
-               
+           <div class="right-side-item-bottom">               
                 <div class="right-side-item-search-box">
                      <i class="fa fa-search"  style="font-size: 13px;"></i>  </i>
                     <input type="text" name="" id="" placeholder="Search ...">
                </div>
-
-
-                <div class="table-wrapper">
-                    
+                <div id="table-wrapper" class="table-wrapper ">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" >
+                              <div class="containment"style="">
+                                  <h3>Tractors</h3>
+                                  <p style="font-size: 3em; margin-top: 12%;">
+                                      010
+                                  </p>
+                                  <div class="ico_rims" style="margin-top: 5%;">
+                                       <i class="fas fa-exchange-alt" onclick="flipCard(this)"></i>
+                                      <i class="fas fa-pen-alt update-icon"></i>
+                                  </div>                               
+                                  <i class="far fa-trash-alt dlt-icon" onclick="deleteObject(this)"></i>                                
+                                  <span style="position: absolute; top: 15%; left: 15px;"><i class="fas fa-balance-scale"></i></span>                                
+                              </div>
+                            </div>
+                            <div class="flip-card-back">
+                              <div class="containment">
+                                  <h3>Extra</h3>
+                                  <div class="">
+                                      <p style=
+                                      "padding: 1px;
+                                       margin: 0%; 
+                                       width: 40%;
+                                      background-color: darkgrey;
+                                      font-size: 10px;">Description</p>
+                                       <div style="
+                                          background-color: #15384f; 
+                                          font-size: 12px; height: 10vh;" class="desc_body">
+                                          Heloo Winston is here
+                                       </div>
+                                  </div>  
+                                  <div class="">
+                                      <p style=
+                                      "padding: 1px;
+                                       margin: 0%; 
+                                       width: 40%;
+                                      background-color: darkgrey;
+                                      font-size: 10px;">Catetory</p>
+                                       <div style="
+                                          background-color: #15384f; 
+                                          font-size: 12px; height: 5vh;" class="desc_body">
+                                          Heloo Winston is here
+                                       </div>
+                                  </div>                               
+                                  <i class="far fa-eye view-icon" onclick="flipCard_back(this)" aria-hidden="true"></i>                                
+                              </div>
+                            </div>
+                          </div>
+                          </div>     
+                    </div>
                 </div>
            </div>
        </div>
