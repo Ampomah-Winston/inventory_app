@@ -24,7 +24,10 @@ $(document).ready(function(){
     toggle($(".t3"),$(".tb3"),$(".ico3"));
 });
 
+//**************** Left-side buttons *****************//
 let btn_startAdd  = document.getElementById('start_add')
+let btn_loadData = btn_startAdd.nextElementSibling;
+
 let backdrop = document.getElementById('backdrop');
 let tag_ops = document.getElementById('tag_ops');
 
@@ -78,7 +81,7 @@ let single_row = (data) =>{
                 <i class="fas fa-pen-alt update-icon"></i>
             </div>                               
             <i class="far fa-trash-alt dlt-icon" onclick="deleteObject(this)"></i>                                
-            <span style="position: absolute; top: 15%; left: 15px;"><i class="fas fa-balance-scale"></i></span>                                
+            <span style="position: absolute; top: 30%; left: 15px; font-size:10px;"><i class="fas fa-balance-scale"></i></span>                                
         </div>
       </div>
       <div class="flip-card-back">
@@ -231,16 +234,6 @@ let appItem = () =>{
   //   }));
 
 }
-btn_startAdd.addEventListener('click',()=>{
-   backdrop.classList.add('visible')
-   tag_ops.style.display = 'block'
-})
-
-backdrop.addEventListener('click',()=>{
-  backdrop.classList.remove('visible')
-  tag_ops.style.display = 'none'
-})
-
 
 btn_clear.addEventListener('click',()=>{
   clear(input_name,input_qty,input_cate,input_desc);
@@ -258,3 +251,18 @@ btn_add.addEventListener('click',()=>{
   saveData(getInputs('#233-009-21',input_name,input_qty,input_cate,input_desc))
   load_multiple_data()
 })
+
+btn_startAdd.addEventListener('click',()=>{
+  backdrop.classList.add('visible')
+  tag_ops.style.display = 'block'
+})
+
+btn_loadData.addEventListener('click',()=>{
+  load_multiple_data();
+})
+
+backdrop.addEventListener('click',()=>{
+ backdrop.classList.remove('visible')
+ tag_ops.style.display = 'none'
+})
+

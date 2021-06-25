@@ -6,14 +6,14 @@
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: deepskyblue;
+    background: rgb(1, 32, 43);
     border-radius: 5px;
     cursor: pointer;
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: chartreuse;
+    background: rgb(3, 74, 133);
     height: 10px;
     border-radius: 5px; cursor: pointer;
   }
