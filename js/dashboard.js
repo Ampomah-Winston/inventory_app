@@ -248,6 +248,7 @@ btn_clear.addEventListener('click',()=>{
 
 let load_multiple_data = ()=>{
   let target = document.getElementById('table-wrapper')
+  target.innerHTML = '';
   for(item of getAllData('#233-009-21')){
     target.append(single_row(item))
   }
