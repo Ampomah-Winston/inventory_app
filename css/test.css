@@ -5,13 +5,14 @@
 }
 
 #tag_ops{
-    width: 40%;
+    width: 45%;
     height: 70%;
-    background-color: crimson;
+    background-color: white;
     position: absolute;
     z-index: 102;
     top: 10%;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
-    background-image: url('../images/action2.svg');
+    /* background-image: url('../images/action2.svg'); */
+    opacity: 0.8;
 }

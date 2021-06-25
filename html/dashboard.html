@@ -8,12 +8,56 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/scrollBar.css">
     <link rel="stylesheet" href="../css/test.css">
+    <link rel="stylesheet" href="../css/activity.css">
     <script src="../js static/4efdf8f922.js" ></script>
 </head>
 <body>
    <div class="container center-row">
     <div id="backdrop"></div>
-    <div id="tag_ops"></div>
+    <div id="tag_ops">
+        <div id="screen-header" class="screen-header">
+            <div class="screen-header-left">
+              <div class="screen-header-button close"></div>
+              <div class="screen-header-button maximize"></div>
+              <div class="screen-header-button minimize"></div>
+            </div>
+            <div class="screen-header-right">
+              <div class="screen-header-ellipsis"></div>
+              <div class="screen-header-ellipsis"></div>
+              <div class="screen-header-ellipsis"></div>
+            </div>
+          </div>
+
+          <div  class="screen-body" id="screen-body">
+            <div class="screen-body-item left">
+              <div class="app-title">
+                <span>CREATE</span>
+                <span>ITEM</span>
+              </div>
+              <div class="app-contact">ACCESS-NUMBER : +62 81 314 928 595</div>
+            </div>
+            <div class="screen-body-item right">
+              <div class="app-form">
+                <div class="app-form-group">
+                  <input class="app-form-control" placeholder="NAME" value="Sumsung charger">
+                </div>
+                <div class="app-form-group">
+                  <input class="app-form-control" placeholder="QUANTITY" value="20">
+                </div>
+                <div class="app-form-group">
+                  <input class="app-form-control" placeholder="CATEGORY" value="Charger">
+                </div>
+                <div class="app-form-group message">
+                  <input class="app-form-control" placeholder="DESCRIPTION" value="Mobile phone charger">
+                </div>
+                <div class="app-form-group buttons">
+                  <button class="app-form-button">CLEAR</button>
+                  <button class="app-form-button">ADD</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
     <div class="card" id="card">
         <div class="card-header center-column">
             <h3 style="color: white;">Data Summary</h3>
@@ -201,6 +245,7 @@
 <!-- <script src="../js/dashboard.js" ></script> -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="../js/dashboard.js" ></script>
+<script src="../js/activity.js" ></script>
 <script>
     //Make the DIV element draggagle: 
     function dragElement(elmnt) {

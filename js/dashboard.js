@@ -1,3 +1,5 @@
+import { getInput, saveData } from 'activity.js'
+
 $(document).ready(function(){  
    $(".fa-caret-square-down").css("transition","1s");
     toggle($("#btn_dash"),$("#dash_container"),$(".dash_ico"));
@@ -5,7 +7,7 @@ $(document).ready(function(){
     toggle($(".t2"),$(".tb2"),$(".ico2"));
     toggle($(".t3"),$(".tb3"),$(".ico3"));
     // deleteObject($('dlt-icon'),$('dlt-icon').parent())
-    backdrop.classList.add('visible')
+    // backdrop.classList.add('visible')    
 });
 
 let btn_startAdd  = document.getElementById('start_add')
@@ -45,8 +47,7 @@ let colorPicker = (int) =>{
   return int == 0 ? '#fc8263' : (int > 1 && int < 21) ? '#faa23d' : '#63fc70';
 }
 
-let single_row = (data) =>{
-  
+let single_row = (data) =>{  
   let item = document.createElement('div')
   item.className = 'flip-card' 
   item.innerHTML =  `
@@ -98,10 +99,7 @@ let single_row = (data) =>{
         </div>
       </div>
     </div>
-    </div> 
-
-  `
-
+    </div>  `
   return item;
 }
 
@@ -114,6 +112,7 @@ let appItem = () =>{
 }
 
 btn_startAdd.addEventListener('click',()=>{
-  appItem();
+  // appItem();
   // backdrop.classList.add('visible')
+  console.log(saveData)
 })
