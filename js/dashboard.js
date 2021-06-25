@@ -1,4 +1,20 @@
-import { getInput, saveData } from 'activity.js'
+let act_main = document.getElementById('screen-body')
+let act_main_left = act_main.firstElementChild;
+let act_main_right = act_main.lastElementChild;
+
+let app_form = act_main_right.firstElementChild;
+//***************** form acts *******************//
+let input_name = app_form.children[0].firstElementChild
+let input_qty = app_form.children[1].firstElementChild
+let input_cate = app_form.children[2].firstElementChild
+let input_desc = app_form.children[3].firstElementChild
+
+    //*************** buttons **************//
+let input_buttons = app_form.lastElementChild;
+let btn_clear = input_buttons.firstElementChild;
+let btn_add = input_buttons.lastElementChild;
+
+// alert('hello')
 
 $(document).ready(function(){  
    $(".fa-caret-square-down").css("transition","1s");
@@ -6,12 +22,11 @@ $(document).ready(function(){
     toggle($(".t1"),$(".tb1"),$(".ico1"));
     toggle($(".t2"),$(".tb2"),$(".ico2"));
     toggle($(".t3"),$(".tb3"),$(".ico3"));
-    // deleteObject($('dlt-icon'),$('dlt-icon').parent())
-    // backdrop.classList.add('visible')    
 });
 
 let btn_startAdd  = document.getElementById('start_add')
 let backdrop = document.getElementById('backdrop');
+let tag_ops = document.getElementById('tag_ops');
 
 let toggle =(btn,body,icon)=>{
   btn.click(()=>{
@@ -103,16 +118,142 @@ let single_row = (data) =>{
   return item;
 }
 
-let appItem = () =>{
-  let target = document.getElementById('table-wrapper')
-   target.append(single_row({
-     name:'Wrist-watch',
-     qty:(Math.floor(Math.random()*40)+0)+''
-    }));
+/**************** activity ops *****************/
+//*************** clear function ********************/
+let clear=(...inputs)=>{
+  for(input of inputs){
+      input.value = ''
+  }
+}
+//*************** get Input function ********************/
+let getInputs=(access_key,...inputs)=>{
+  let dataProp = {};
+  if(!(inputs.length < 4)){
+      dataProp = {
+      id: (Math.floor(Math.random()*9999999)+0)+'',
+      name:inputs[0].value,
+      qty:inputs[1].value,
+      categ:inputs[2].value,
+      desc:inputs[3].value,
+      access_key:access_key
+      }
+      return dataProp
+  }else{
+      alert('Some fields are empty')
+  }     
 }
 
+let saveData = (dataObj) =>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : 
+      JSON.parse( localStorage.getItem('mashedInvenData'));
+  avbleData.push(dataObj);
+  localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
+}
+
+let getAllData =(access_key)=>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  let outData = [];
+  if(!(avbleData).length <= 0){
+     avbleData.map((value,index)=>{
+         if(value.access_key == access_key){
+           let  dataProp = {
+               id:value.id,
+              name:value.name,
+              qty:value.qty,
+              categ:value.categ,
+              desc:value.desc,
+              access_key:value.access_key
+              }
+              outData.push(dataProp)
+         }
+     })
+  }
+  return outData;
+}
+
+let getSingleData =(id,access_key)=>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  let outData = {};
+  if(!(avbleData).length <= 0){
+     avbleData.map((value,index)=>{
+         if(value.access_key == access_key){
+           if(value.id == id){
+              let  dataProp = {
+                  id:value.id,
+                  name:value.name,
+                  qty:value.qty,
+                  categ:value.categ,
+                  desc:value.desc,
+                  access_key:value.access_key
+                  }
+              outData=dataProp
+           }
+         }
+     })
+  }
+  return outData;
+}
+
+let deleteSingleData = (id,access_key) =>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  console.log(avbleData.length)
+  if(!(avbleData).length <= 0){
+     avbleData.map((value,index)=>{
+         if(value.access_key == access_key){
+           if(value.id == id){
+              avbleData.pop(Number(index));
+           }
+         }
+     })
+  }
+  localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
+  return access_key;
+}
+
+let truncateData = (access_key) =>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  if(!(avbleData).length <= 0){
+      avbleData.map((value,index)=>{
+          if(value.access_key === access_key){
+            console.log(value.id,index,value);
+          }
+      })
+   }
+  //  localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
+}
+
+/***************** end of activity *************/
+
+let appItem = () =>{ 
+  //  target.append(single_row({
+  //    name:'Wrist-watch',
+  //    qty:(Math.floor(Math.random()*40)+0)+''
+  //   }));
+
+}
 btn_startAdd.addEventListener('click',()=>{
-  // appItem();
-  // backdrop.classList.add('visible')
-  console.log(saveData)
+   backdrop.classList.add('visible')
+   tag_ops.style.display = 'block'
+})
+
+backdrop.addEventListener('click',()=>{
+  backdrop.classList.remove('visible')
+  tag_ops.style.display = 'none'
+})
+
+
+btn_clear.addEventListener('click',()=>{
+  clear(input_name,input_qty,input_cate,input_desc);
+})
+
+let load_multiple_data = ()=>{
+  let target = document.getElementById('table-wrapper')
+  for(item of getAllData('#233-009-21')){
+    target.append(single_row(item))
+  }
+}
+
+btn_add.addEventListener('click',()=>{
+  saveData(getInputs('#233-009-21',input_name,input_qty,input_cate,input_desc))
+  load_multiple_data()
 })

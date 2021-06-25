@@ -44,6 +44,19 @@ img{
   pointer-events: all;
 }
 
+#tag_ops{
+  width: 45%;
+  height: 70%;
+  background-color: white;
+  position: absolute;
+  z-index: 102;
+  top: 10%;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  opacity: 0.8;
+  display: none;
+}
+
 .left-side{   
     background-color: transparent;
     height: 100%;
@@ -354,8 +367,8 @@ img{
 }
 
 .table-wrapper{
-  height: 90%;
-  max-height: 90%; 
+  height: 95%;
+  max-height: 95%; 
   width: 100%;
   max-width: 100%;
   overflow-y: scroll;

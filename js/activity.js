@@ -1,18 +1,3 @@
-let act_main = document.getElementById('screen-body')
-let act_main_left = act_main.firstElementChild;
-let act_main_right = act_main.lastElementChild;
-
-let app_form = act_main_right.firstElementChild;
-//***************** form acts *******************//
-let input_name = app_form.children[0].firstElementChild
-let input_qty = app_form.children[1].firstElementChild
-let input_cate = app_form.children[2].firstElementChild
-let input_desc = app_form.children[3].firstElementChild
-
-    //*************** buttons **************//
-let input_buttons = app_form.lastElementChild;
-let btn_clear = input_buttons.firstElementChild;
-let btn_add = input_buttons.lastElementChild;
 //*************** clear function ********************/
 let clear=(...inputs)=>{
     for(input of inputs){
@@ -20,7 +5,6 @@ let clear=(...inputs)=>{
     }
 }
 //*************** get Input function ********************/
-
 let getInput=(access_key,...inputs)=>{
     let dataProp = {};
     if(!(inputs.length < 4)){
@@ -38,7 +22,7 @@ let getInput=(access_key,...inputs)=>{
     }     
 }
 
-let saveData = (dataObj) =>{
+ let saveData = (dataObj) =>{
     let avbleData = localStorage.getItem('mashedInvenData') == null? [] : 
         JSON.parse( localStorage.getItem('mashedInvenData'));
     avbleData.push(dataObj);
@@ -116,5 +100,3 @@ let truncateData = (access_key) =>{
      }
     //  localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
 }
-
-export {getInput,saveData,getAllData,getSingleData,deleteSingleData}
