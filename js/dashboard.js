@@ -225,15 +225,22 @@ let truncateData = (access_key) =>{
   //  localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
 }
 
+let appItem = (access_key) =>{ 
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  let cat_arr = [];
+  let count = 0;
+  avbleData.map((value)=>{
+    cat_arr.push(value.categ)
+  })
+  
+  for(let mini of cat_arr){
+      
+  }
+   return cat_arr
+}
+
 /***************** end of activity *************/
 
-let appItem = () =>{ 
-  //  target.append(single_row({
-  //    name:'Wrist-watch',
-  //    qty:(Math.floor(Math.random()*40)+0)+''
-  //   }));
-
-}
 
 btn_clear.addEventListener('click',()=>{
   clear(input_name,input_qty,input_cate,input_desc);
