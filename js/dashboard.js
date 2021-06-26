@@ -14,7 +14,10 @@ let input_buttons = app_form.lastElementChild;
 let btn_clear = input_buttons.firstElementChild;
 let btn_add = input_buttons.lastElementChild;
 
-// alert('hello')
+//******************* summary *************** */
+let lbl_tot_stock = document.getElementById('lbl_tot_stock');
+let lbl_tot_categ = document.getElementById('lbl_tot_categ');
+let lbl_items_stocked = document.getElementById('lbl_items_stocked');
 
 $(document).ready(function(){  
    $(".fa-caret-square-down").css("transition","1s");
@@ -30,6 +33,10 @@ let btn_loadData = btn_startAdd.nextElementSibling;
 
 let backdrop = document.getElementById('backdrop');
 let tag_ops = document.getElementById('tag_ops');
+
+let screen_body =  document.getElementById('screen-body');
+let screen_banners = screen_body.firstElementChild.firstElementChild.children;
+
 
 let toggle =(btn,body,icon)=>{
   btn.click(()=>{
@@ -61,6 +68,10 @@ let flipCard_back=(viewBtn)=>{
   flipCard_inner.style.transform = 'rotateY(-0deg)'
 }
 
+let updateCard = (object)=>{
+  let parent = object.parentElement.parentElement.parentElement.parentElement;
+}
+
 let colorPicker = (int) =>{
   return int == 0 ? '#fc8263' : (int > 1 && int < 21) ? '#faa23d' : '#63fc70';
 }
@@ -73,15 +84,16 @@ let single_row = (data) =>{
       <div class="flip-card-front" >
         <div class="containment"style="background-color: ${colorPicker(data.qty)};margin-top:2px;">
             <h3>${data.name}</h3>
+            <i style="position: absolute; top: 30%; left: 15px; font-size:10px;" class="fas fa-balance-scale"></i>
             <p style="font-size: 3em; margin-top: 12%;">
               ${data.qty}
             </p>
             <div class="ico_rims" style="margin-top: 5%;">
                  <i class="fas fa-exchange-alt" onclick="flipCard(this)"></i>
-                <i class="fas fa-pen-alt update-icon"></i>
+                <i class="fas fa-pen-alt update-icon" onclick="updateCard(this)"></i>
             </div>                               
             <i class="far fa-trash-alt dlt-icon" onclick="deleteObject(this)"></i>                                
-            <span style="position: absolute; top: 30%; left: 15px; font-size:10px;"><i class="fas fa-balance-scale"></i></span>                                
+                                        
         </div>
       </div>
       <div class="flip-card-back">
@@ -97,7 +109,7 @@ let single_row = (data) =>{
                  <div style="
                     background-color: #15384f; 
                     font-size: 12px; height: 10vh;" class="desc_body">
-                    Heloo Winston is here
+                    ${data.desc}
                  </div>
             </div>  
             <div class="">
@@ -110,7 +122,7 @@ let single_row = (data) =>{
                  <div style="
                     background-color: #15384f; 
                     font-size: 12px; height: 5vh;" class="desc_body">
-                    Heloo Winston is here
+                    ${data.categ}
                  </div>
             </div>                               
             <i class="far fa-eye view-icon" onclick="flipCard_back(this)" aria-hidden="true"></i>                                
@@ -145,7 +157,7 @@ let getInputs=(access_key,...inputs)=>{
       alert('Some fields are empty')
   }     
 }
-
+//*************** DDL ****************/
 let saveData = (dataObj) =>{
   let avbleData = localStorage.getItem('mashedInvenData') == null? [] : 
       JSON.parse( localStorage.getItem('mashedInvenData'));
@@ -153,6 +165,15 @@ let saveData = (dataObj) =>{
   localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
 }
 
+let updateData = (id,dataObj) =>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : 
+      JSON.parse( localStorage.getItem('mashedInvenData'));
+  avbleData.push(dataObj);
+  localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
+}
+//**************** end of DDL ******************/
+
+//****************** DML **********************/
 let getAllData =(access_key)=>{
   let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
   let outData = [];
@@ -196,7 +217,46 @@ let getSingleData =(id,access_key)=>{
   }
   return outData;
 }
+//************** end of DML */
 
+//************** statics logic ************************/
+let getNumberOfCat = (access_key)=>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  let catSet = new Set();
+  avbleData.map((value,index)=>{
+    catSet.add(value.categ)
+  })
+  return catSet.size
+}
+
+let getNumberOf_items = (access_key)=>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  return avbleData.length
+}
+
+let getNumber_out_of_stock = (access_key)=>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  let count = 0;
+  avbleData.map((value,index)=>{
+    if(value.qty == '0'){
+      count ++;
+    }
+  })
+  return count
+}
+
+let getNumberOf_StockedItems = (access_key)=>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  let count = 0;
+  avbleData.map((value,index)=>{
+    if(value.qty > 0){
+      count ++;
+    }
+  })
+  return count
+}
+
+//************** end of statics logic ************************/
 let deleteSingleData = (id,access_key) =>{
   let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
   console.log(avbleData.length)
@@ -225,22 +285,7 @@ let truncateData = (access_key) =>{
   //  localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
 }
 
-let appItem = (access_key) =>{ 
-  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
-  let cat_arr = [];
-  let count = 0;
-  avbleData.map((value)=>{
-    cat_arr.push(value.categ)
-  })
-  
-  for(let mini of cat_arr){
-      
-  }
-   return cat_arr
-}
-
 /***************** end of activity *************/
-
 
 btn_clear.addEventListener('click',()=>{
   clear(input_name,input_qty,input_cate,input_desc);
@@ -250,18 +295,38 @@ let load_multiple_data = ()=>{
   let target = document.getElementById('table-wrapper')
   target.innerHTML = '';
   for(item of getAllData('#233-009-21')){
-    target.append(single_row(item))
+     target.append(single_row(item))    
   }
 }
 
 btn_add.addEventListener('click',()=>{
-  saveData(getInputs('#233-009-21',input_name,input_qty,input_cate,input_desc))
-  load_multiple_data()
+  if(btn_add.innerText == 'CREATE'){
+    saveData(getInputs('#233-009-21',input_name,input_qty,input_cate,input_desc))
+  }else{
+    updateData
+  }  
+  lbl_tot_categ.innerText = getNumberOfCat('#233-009-21');
+  lbl_tot_stock.innerText = getNumberOf_items('#233-009-21');
+  lbl_items_stocked.innerText = getNumberOf_StockedItems('#233-009-21');
+  load_multiple_data();
 })
 
-btn_startAdd.addEventListener('click',()=>{
+let open_addForm = (which)=>{  
+  if(which == 0){
+    screen_banners[0].innerText = 'CREATE'
+    screen_banners[1].innerText = 'ITEM'
+    btn_add.innerText = "CREATE"
+  }else{
+    screen_banners[0].innerText = 'UPDATE'
+    screen_banners[1].innerText = 'ITEM'
+    btn_add.innerText = "UPDATE"
+  }
   backdrop.classList.add('visible')
   tag_ops.style.display = 'block'
+}
+
+btn_startAdd.addEventListener('click',()=>{
+  open_addForm(0)
 })
 
 btn_loadData.addEventListener('click',()=>{
@@ -273,3 +338,7 @@ backdrop.addEventListener('click',()=>{
  tag_ops.style.display = 'none'
 })
 
+lbl_tot_categ.innerText = getNumberOfCat('#233-009-21');
+lbl_tot_stock.innerText = getNumberOf_items('#233-009-21');
+lbl_items_stocked.innerText = getNumberOf_StockedItems('#233-009-21');
+load_multiple_data();
