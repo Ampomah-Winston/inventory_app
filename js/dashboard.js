@@ -27,9 +27,14 @@ $(document).ready(function(){
     toggle($(".t3"),$(".tb3"),$(".ico3"));
 });
 
+//**************** current card *******************/
+let current_card_data ;
+let current_card;
+
 //**************** Left-side buttons *****************//
 let btn_startAdd  = document.getElementById('start_add')
 let btn_loadData = btn_startAdd.nextElementSibling;
+let btn_truncate = btn_loadData.nextElementSibling;
 
 let backdrop = document.getElementById('backdrop');
 let tag_ops = document.getElementById('tag_ops');
@@ -37,7 +42,56 @@ let tag_ops = document.getElementById('tag_ops');
 let screen_body =  document.getElementById('screen-body');
 let screen_banners = screen_body.firstElementChild.firstElementChild.children;
 
+//************** statics logic ************************/
+let getNumberOfCat = (access_key)=>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  let catSet = new Set();
+  avbleData.map((value,index)=>{
+    catSet.add(value.categ)
+  })
+  return catSet.size
+}
 
+let getNumberOf_items = (access_key)=>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  return avbleData.length
+}
+
+let getNumber_out_of_stock = (access_key)=>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  let count = 0;
+  avbleData.map((value,index)=>{
+    if(value.qty == '0'){
+      count ++;
+    }
+  })
+  return count
+}
+
+let getNumberOf_StockedItems = (access_key)=>{
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
+  let count = 0;
+  avbleData.map((value,index)=>{
+    if(value.qty > 0){
+      count ++;
+    }
+  })
+  return count
+}
+
+
+let load_multiple_data = ()=>{
+  let target = document.getElementById('table-wrapper')
+  target.innerHTML = '';
+  for(item of getAllData('#233-009-21')){
+     target.append(single_row(item))    
+  }
+  lbl_tot_categ.innerText = getNumberOfCat('#233-009-21');
+lbl_tot_stock.innerText = getNumberOf_items('#233-009-21');
+lbl_items_stocked.innerText = getNumberOf_StockedItems('#233-009-21');
+}
+
+//************** end of statics logic ************************/
 let toggle =(btn,body,icon)=>{
   btn.click(()=>{
     body.slideToggle("2000");
@@ -48,11 +102,6 @@ let toggle =(btn,body,icon)=>{
        icon.css("transform","rotateZ(90deg)");
     }
   });
-}
-
-let deleteObject=(delBtn)=>{
-  let target = delBtn.parentElement.parentElement.parentElement.parentElement
-  target.style.display = 'none'
 }
 
 let flipCard=(viewBtn)=>{
@@ -68,12 +117,45 @@ let flipCard_back=(viewBtn)=>{
   flipCard_inner.style.transform = 'rotateY(-0deg)'
 }
 
-let updateCard = (object)=>{
-  let parent = object.parentElement.parentElement.parentElement.parentElement;
+let updateCard = (card)=>{//will be called by the update ui (which is a pen icone)
+  open_addForm(1);
+  current_card = card;
+  let parent = card.parentElement.parentElement.parentElement.parentElement;
+  let flip_front_containmt = parent.firstElementChild.firstElementChild;
+  let flip_back_containmt = parent.lastElementChild.firstElementChild;
+  
+  let item_id=flip_front_containmt.children['data_id'];
+  let item_name =flip_front_containmt.children['data_name'];
+  let item_qty=flip_front_containmt.children['data_qty'];
+  
+  let item_cate = flip_back_containmt.children[1].lastElementChild
+  let item_desc= flip_back_containmt.children[2].lastElementChild
+  // console.log(item_desc)
+  current_card_data = {
+    id:item_id.innerText.trim(),
+    name:item_name.innerText.trim(),
+    qty:item_qty.innerText.trim(),
+    categ:item_cate.innerText.trim(),
+    desc:item_desc.innerText.trim(),
+    access_key:'#233-009-21'
+  }  
+  
+  input_name.value = current_card_data.name;
+  input_qty.value =current_card_data.qty;
+  input_cate = current_card_data.categ
+  input_desc = current_card_data.desc
+    console.log(current_card_data)
+}
+
+let deleteObject=(delBtn)=>{
+  let target = delBtn.parentElement.parentElement.parentElement.parentElement
+  target.style.display = 'none'
+  deleteSingleData(delBtn);
+  console.log(delBtn);
 }
 
 let colorPicker = (int) =>{
-  return int == 0 ? '#fc8263' : (int > 1 && int < 21) ? '#faa23d' : '#63fc70';
+  return int == 0 ? 'rgb(228, 41, 97);' : (int >= 1 && int < 21) ? 'rgb(228, 141, 41);' : '#63fc70';
 }
 
 let single_row = (data) =>{  
@@ -83,18 +165,18 @@ let single_row = (data) =>{
   <div class="flip-card-inner">
       <div class="flip-card-front" >
         <div class="containment"style="background-color: ${colorPicker(data.qty)};margin-top:2px;">
-            <h3>${data.name}</h3>
+        <span id="data_id" style="display:none"> ${data.id} </span>    
+        <h3 id="data_name">${data.name}</h3>
             <i style="position: absolute; top: 30%; left: 15px; font-size:10px;" class="fas fa-balance-scale"></i>
-            <p style="font-size: 3em; margin-top: 12%;">
+            <p id="data_qty" style="font-size: 3em; margin-top: 12%;">
               ${data.qty}
             </p>
             <div class="ico_rims" style="margin-top: 5%;">
                  <i class="fas fa-exchange-alt" onclick="flipCard(this)"></i>
                 <i class="fas fa-pen-alt update-icon" onclick="updateCard(this)"></i>
             </div>                               
-            <i class="far fa-trash-alt dlt-icon" onclick="deleteObject(this)"></i>                                
-                                        
-        </div>
+            <i class="far fa-trash-alt dlt-icon" style="color:black;" onclick="deleteObject(this)"></i> 
+      </div>
       </div>
       <div class="flip-card-back">
         <div class="containment">
@@ -106,7 +188,7 @@ let single_row = (data) =>{
                  width: 40%;
                 background-color: darkgrey;
                 font-size: 10px;">Description</p>
-                 <div style="
+                 <div id="data_desc" style="
                     background-color: #15384f; 
                     font-size: 12px; height: 10vh;" class="desc_body">
                     ${data.desc}
@@ -119,7 +201,7 @@ let single_row = (data) =>{
                  width: 40%;
                 background-color: darkgrey;
                 font-size: 10px;">Catetory</p>
-                 <div style="
+                 <div id="data_categ" style="
                     background-color: #15384f; 
                     font-size: 12px; height: 5vh;" class="desc_body">
                     ${data.categ}
@@ -165,11 +247,48 @@ let saveData = (dataObj) =>{
   localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
 }
 
-let updateData = (id,dataObj) =>{
+let updateData = () =>{//will be called by the universal ops button
+  //********** get current input ********/
+   input_name = app_form.children[0].firstElementChild
+ input_qty = app_form.children[1].firstElementChild
+ input_cate = app_form.children[2].firstElementChild
+ input_desc = app_form.children[3].firstElementChild
+
+  let parent = current_card.parentElement.parentElement.parentElement.parentElement;
+  let flip_front_containmt = parent.firstElementChild.firstElementChild;
+  
+  let item_id=flip_front_containmt.children['data_id'];
+  
+  current_card_data = {
+    id:item_id.innerText.trim(),
+    name:input_name.value.trim(),
+    qty:input_qty.value.trim(),
+    categ:input_cate.value.trim(),
+    desc:input_desc.value.trim(),
+    access_key:'#233-009-21'
+  }  
+  console.log(current_card_data.access_key)
+  
+  input_name.value = current_card_data.name;
+  input_qty.value =current_card_data.qty;
+  input_cate = current_card_data.categ
+  input_desc = current_card_data.desc
+
   let avbleData = localStorage.getItem('mashedInvenData') == null? [] : 
-      JSON.parse( localStorage.getItem('mashedInvenData'));
-  avbleData.push(dataObj);
+  JSON.parse( localStorage.getItem('mashedInvenData'));
+  for(item of avbleData){
+    if(current_card_data.id.trim() === item.id){
+       avbleData.find((value,index)=>{       
+         if(value.id.trim() == current_card_data.id.trim()){  
+           console.log(avbleData[index] = current_card_data);
+         }else{
+           console.log('no update')
+         }
+       })
+    }
+  }
   localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
+  load_multiple_data();
 }
 //**************** end of DDL ******************/
 
@@ -219,58 +338,32 @@ let getSingleData =(id,access_key)=>{
 }
 //************** end of DML */
 
-//************** statics logic ************************/
-let getNumberOfCat = (access_key)=>{
-  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
-  let catSet = new Set();
-  avbleData.map((value,index)=>{
-    catSet.add(value.categ)
-  })
-  return catSet.size
-}
+let deleteSingleData = (card) =>{
+  let parent = card.parentElement.parentElement.parentElement.parentElement;
+  let flip_front_containmt = parent.firstElementChild.firstElementChild;
+  console.log(flip_front_containmt.children[0].children['data_id'])  
 
-let getNumberOf_items = (access_key)=>{
-  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
-  return avbleData.length
-}
+  let item_id=flip_front_containmt.children[0].children['data_id'];  
+  current_card_data = {
+    id:item_id.innerText.trim(),
+    access_key:'#233-009-21'
+  }  
 
-let getNumber_out_of_stock = (access_key)=>{
-  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
-  let count = 0;
-  avbleData.map((value,index)=>{
-    if(value.qty == '0'){
-      count ++;
-    }
-  })
-  return count
-}
-
-let getNumberOf_StockedItems = (access_key)=>{
-  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
-  let count = 0;
-  avbleData.map((value,index)=>{
-    if(value.qty > 0){
-      count ++;
-    }
-  })
-  return count
-}
-
-//************** end of statics logic ************************/
-let deleteSingleData = (id,access_key) =>{
-  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : JSON.parse( localStorage.getItem('mashedInvenData'));
-  console.log(avbleData.length)
-  if(!(avbleData).length <= 0){
-     avbleData.map((value,index)=>{
-         if(value.access_key == access_key){
-           if(value.id == id){
-              avbleData.pop(Number(index));
-           }
+  let avbleData = localStorage.getItem('mashedInvenData') == null? [] : 
+  JSON.parse( localStorage.getItem('mashedInvenData'));
+  for(item of avbleData){
+    if(current_card_data.id.trim() === item.id){
+       avbleData.find((value,index)=>{       
+         if(value.id.trim() == current_card_data.id.trim()){  
+           avbleData.pop(index);
+         }else{
+           console.log('no update')
          }
-     })
+       })
+    }
   }
   localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
-  return access_key;
+  load_multiple_data();  
 }
 
 let truncateData = (access_key) =>{
@@ -278,11 +371,15 @@ let truncateData = (access_key) =>{
   if(!(avbleData).length <= 0){
       avbleData.map((value,index)=>{
           if(value.access_key === access_key){
-            console.log(value.id,index,value);
+            avbleData.splice(0,)
           }
       })
    }
-  //  localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
+   localStorage.setItem('mashedInvenData',JSON.stringify(avbleData))
+   lbl_tot_categ.innerText = getNumberOfCat('#233-009-21');
+   lbl_tot_stock.innerText = getNumberOf_items('#233-009-21');
+   lbl_items_stocked.innerText = getNumberOf_StockedItems('#233-009-21');
+   load_multiple_data();
 }
 
 /***************** end of activity *************/
@@ -291,19 +388,11 @@ btn_clear.addEventListener('click',()=>{
   clear(input_name,input_qty,input_cate,input_desc);
 })
 
-let load_multiple_data = ()=>{
-  let target = document.getElementById('table-wrapper')
-  target.innerHTML = '';
-  for(item of getAllData('#233-009-21')){
-     target.append(single_row(item))    
-  }
-}
-
 btn_add.addEventListener('click',()=>{
   if(btn_add.innerText == 'CREATE'){
     saveData(getInputs('#233-009-21',input_name,input_qty,input_cate,input_desc))
   }else{
-    updateData
+    updateData(current_card_data);
   }  
   lbl_tot_categ.innerText = getNumberOfCat('#233-009-21');
   lbl_tot_stock.innerText = getNumberOf_items('#233-009-21');
@@ -324,7 +413,7 @@ let open_addForm = (which)=>{
   backdrop.classList.add('visible')
   tag_ops.style.display = 'block'
 }
-
+//************* open form for editing **************/
 btn_startAdd.addEventListener('click',()=>{
   open_addForm(0)
 })
@@ -338,7 +427,4 @@ backdrop.addEventListener('click',()=>{
  tag_ops.style.display = 'none'
 })
 
-lbl_tot_categ.innerText = getNumberOfCat('#233-009-21');
-lbl_tot_stock.innerText = getNumberOf_items('#233-009-21');
-lbl_items_stocked.innerText = getNumberOf_StockedItems('#233-009-21');
 load_multiple_data();
